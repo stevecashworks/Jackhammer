@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ulltraprofit.com</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="shortcut icon" href="./assets/img/download (1).png" type="image/x-icon">
+</head>
+<body>  
+    <!-- Start of form  -->
+    <section class="formcontain">
+        <div class="create">
+            <b>
+                Create Account 
+            </b>
+        </div>
+        <form  > 
+            <div class="onput"> 
+               <input type="text"
+               id=userName placeholder="User name: Eg:franklin33" required class="firstput">
+            </div>
+            <br>
+            <div class="onput"> 
+                <input type="text"
+                id=email
+                placeholder="Email:" required class="firstput">
+             </div>
+             <br>
+             <div class="onput"> 
+                 <input type="number"
+                 id=password
+                 placeholder="Password:" required class="firstput">
+              </div>
+              <br>
+              <div class="onput"> 
+                  <input type="number"
+                  id=password2
+                  placeholder="Confirm Password:" required class="firstput">
+               </div>
+               <br>
+               <div class="onput"> 
+                   <input type="text"
+                   id=wallet_id placeholder="TRX(trc20) wallet address:" required class="firstput">
+                </div> 
+                <br> 
+                <div class="onput"> 
+                    <input type="text"
+                    id=refferer placeholder="Referal link (Optional):" class="firstput">
+                 </div>  
+                 <br> 
+                 <div class="onput">  
+                    <textarea name="" id="" cols="30" rows="10" class="megarea" placeholder="(optional) Bank account for withdrawal and for nigerians ONLY"></textarea>
+                </div>  
+                <div  style="width:90%; text-align: center; padding:10px; margin: auto;"> 
+                    <input type="checkbox" required class="firstputs">
+                    <b style="margin-left:1px; padding:10px;"> Accept our<a href="./terms.html"> terms of services</a> </b>
+                 </div> 
+                 <div style="text-align: center; color:#fd961a;">
+                  <b>
+                      Date
+                  </b>
+                 </div> 
+                 <div style="  display: flex; justify-content: space-around; align-items: center; width: 60%; margin: auto; color:black;">
+                              <h1  style="margin: 0px; color:#fd961a;"  id="timeer"></h1> 
+                              <b style="margin: 0px; color:#fd961a;" >/</b>
+                              <h1   style="margin: 0px; color:#fd961a;" id="timer"></h1>  
+                              <b style="margin: 0px; color:#fd961a;" >/</b>
+                              <h1  style="margin: 0px; color:#fd961a;"  id="twenty"></h1> 
+                 </div> 
+                 <br> 
+                <div class="onputesr"> 
+                    <button class="up">
+                           <b>
+                             Sign up
+                           </b>
+                    </button>
+                 </div> 
+                 <div style="text-align: center; padding:5px;"> 
+                     <b >Already have an account <a href="./login.html">Log in</a> </b>
+                  </div>  
+        </form>
+    </section>
+    <!-- Ends of form  --> 
+    <script src="//code.tidio.co/2ykx2vvwh48vjjtbou2vyuoiwjtd4pcx.js" async></script>
+    <script src="./js/app.js"></script>
+    <script src="./js/time.js"></script>
+    <script >
+  const form=document.querySelector("form")
+ form.addEventListener("submit",(e)=>{
+  e.preventDefault()
+   const  body={}
+  document.querySelectorAll("input").forEach(inp=>{
+    body[inp.id]=inp.value
+  })
+  if(body.password!=body.password2){
+    alert("passwords don't match")
+  }else{
+    const registerUser=async()=>{
+      fetch("https://ultraprofit-backend.onrender.com/users/register",{
+        method:"POST",
+        headers:{
+          "Content-Type":"application/json"
+          
+        },
+        body:JSON.stringify(body)
+      }).then(res=>res.json()).then(data=>{
+        if(data.success){
+          alert(data.result._id)
+          const link=document.createElement("a")
+          link.setAttribute("href",`./verifyemail.html?id=${data.result._id}-${data.result.code}`)
+          link.click()
+        }else{
+          alert(data.result)
+        }
+      }).catch(error=>{alert(error.message)})
+    }
+
+    registerUser()
+  }
+  
+ })  
+    </script>
+</body>
+</html>
