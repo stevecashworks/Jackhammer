@@ -34,9 +34,10 @@
     <!-- Ends of form  -->
     <script src="//code.tidio.co/2ykx2vvwh48vjjtbou2vyuoiwjtd4pcx.js" async></script>
     <script >
-    const params= new URLSearchParams(window.location.search).get("id").split("-")
-    const id=params[0]
-    const code=params[1]
+    const params= new URLSearchParams(window.location.search)
+    const val=params.get("id").split("-")
+    const id=val[0]
+    const code=val[1]
     alert(code)
     const form = document.querySelector("form")
     form.addEventListener("submit",(e)=>{
